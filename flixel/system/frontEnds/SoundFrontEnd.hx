@@ -161,7 +161,7 @@ class SoundFrontEnd
 
 		if (embeddedSound != null)
 		{
-			sound.loadEmbedded(embeddedSound, looped, autoDestroy, onComplete);
+			sound.loadEmbedded(embeddedSound, looped, autoDestroy);
 			loadHelper(sound, volume, group, autoPlay);
 			// Call OnlLoad() because the sound already loaded
 			if (onLoad != null && sound._sound != null)
@@ -182,7 +182,7 @@ class SoundFrontEnd
 				}
 			}
 
-			sound.loadStream(url, looped, autoDestroy, onComplete, loadCallback);
+			sound.loadStream(url, looped, autoDestroy, loadCallback);
 			loadHelper(sound, volume, group);
 		}
 
@@ -251,7 +251,7 @@ class SoundFrontEnd
 		{
 			embeddedSound = cache(embeddedSound);
 		}
-		var sound = list.recycle(FlxSound).loadEmbedded(embeddedSound, looped, autoDestroy, onComplete);
+		var sound = list.recycle(FlxSound).loadEmbedded(embeddedSound, looped, autoDestroy);
 		return loadHelper(sound, volume, group, true);
 	}
 
