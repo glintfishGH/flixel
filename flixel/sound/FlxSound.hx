@@ -385,7 +385,7 @@ class FlxSound extends FlxBasic
 	 * @param	looped			Whether or not this sound should loop endlessly.
 	 * @param	autoDestroy		Whether or not this FlxSound instance should be destroyed when the sound finishes playing.
 	 * 							Default value is false, but `FlxG.sound.play()` and `FlxG.sound.stream()` will set it to true by default.
-	 * @param	onLoad			Funciton that gets called when the sound finishes loading.
+	 * @param	onLoad			Function that gets called when the sound finishes loading.
 	 * @return	This FlxSound instance (nice for chaining stuff together, if you're into that).
 	 */
 	public function loadStream(soundURL:String, looped:Bool = false, autoDestroy:Bool = false, ?onLoad:Void->Void):FlxSound
@@ -434,10 +434,7 @@ class FlxSound extends FlxBasic
 		return init(looped, autoDestroy);
 	}
 	#end
-	
-	/**
-	 * Interal function for setting certain variables.
-	 */
+
 	function init(looped:Bool = false, autoDestroy:Bool = false):FlxSound
 	{
 		this.looped = looped;
@@ -456,20 +453,20 @@ class FlxSound extends FlxBasic
 	 * Call this function if you want this sound's volume to change
 	 * based on distance from a particular FlxObject.
 	 *
-	 * @param	X			The X position of the sound.
-	 * @param	Y			The Y position of the sound.
-	 * @param	TargetObject		The object you want to track.
-	 * @param	Radius			The maximum distance this sound can travel.
-	 * @param	Pan			Whether panning should be used in addition to the volume changes.
+	 * @param	x			The X position of the sound.
+	 * @param	y			The Y position of the sound.
+	 * @param	targetObject		The object you want to track.
+	 * @param	radius			The maximum distance this sound can travel.
+	 * @param	pan			Whether panning should be used in addition to the volume changes.
 	 * @return	This FlxSound instance (nice for chaining stuff together, if you're into that).
 	 */
-	public function proximity(X:Float, Y:Float, TargetObject:FlxObject, Radius:Float, Pan:Bool = true):FlxSound
+	public function proximity(x:Float, y:Float, targetObject:FlxObject, radius:Float, pan:Bool = true):FlxSound
 	{
-		x = X;
-		y = Y;
-		_target = TargetObject;
-		_radius = Radius;
-		_proximityPan = Pan;
+		this.x = x;
+		this.y = y;
+		this._target = targetObject;
+		this._radius = radius;
+		this._proximityPan = pan;
 		return this;
 	}
 	
@@ -541,6 +538,7 @@ class FlxSound extends FlxBasic
 	 *
 	 * @param	duration	The amount of time the fade-out operation should take.
 	 * @param	to			The volume to tween to, 0 by default.
+	 * @param	onComplete	A function that will get called once this sound has faded out.
 	 */
 	public inline function fadeOut(duration:Float = 1, ?to:Float = 0, ?onComplete:FlxTween->Void):FlxSound
 	{
@@ -557,6 +555,7 @@ class FlxSound extends FlxBasic
 	 * @param	duration	The amount of time the fade-in operation should take.
 	 * @param	from		The volume to tween from, 0 by default.
 	 * @param	to			The volume to tween to, 1 by default.
+	 * @param	onComplete	A function that will get called once this sound has faded out.
 	 */
 	public inline function fadeIn(duration:Float = 1, from:Float = 0, to:Float = 1, ?onComplete:FlxTween->Void):FlxSound
 	{
@@ -743,9 +742,9 @@ class FlxSound extends FlxBasic
 		return _volume;
 	}
 	
-	function set_volume(Volume:Float):Float
+	function set_volume(volume:Float):Float
 	{
-		_volume = FlxMath.bound(Volume, 0, 1);
+		_volume = FlxMath.bound(volume, 0, 1);
 		updateTransform();
 		return Volume;
 	}
