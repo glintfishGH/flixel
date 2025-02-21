@@ -639,7 +639,10 @@ class FlxSound extends FlxBasic
 	 */
 	function stopped(?_):Void
 	{
-		onComplete.dispatch();
+		if (onComplete != null)
+		{
+			onComplete.dispatch();
+		}
 			
 		if (looped)
 		{
