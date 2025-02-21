@@ -74,7 +74,7 @@ class FlxSound extends FlxBasic
 	 * An FlxSignal that will get dispatched each time this sound reaches
 	 * its end.
 	 */
-	public var onComplete:FlxSignal
+	public var onComplete:FlxSignal;
 	
 	/**
 	 * Pan amount. -1 = full left, 1 = full right. Proximity based panning overrides this.
@@ -245,7 +245,7 @@ class FlxSound extends FlxBasic
 		amplitudeLeft = 0;
 		amplitudeRight = 0;
 		autoDestroy = false;
-		
+
 		if (onComplete == null)
 		{
 			onComplete = new FlxSignal();
